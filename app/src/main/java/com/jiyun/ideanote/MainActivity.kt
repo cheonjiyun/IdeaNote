@@ -5,12 +5,16 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.time.LocalDateTime
@@ -19,12 +23,32 @@ import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
-
+    //익명 로그인
+    private lateinit var auth: FirebaseAuth
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //익명 로그인
+        // Initialize Firebase Auth
+        auth = Firebase.auth
+
+        auth.signInAnonymously()
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("login", "signInAnonymously:success")
+                    val user = auth.currentUser
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("login", "signInAnonymously:failure", task.exception)
+                    Toast.makeText(baseContext, "로그인을 실패했습니다. 관리자세에 문의하세요.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
+
 
         //저장 버튼
         val saveBtn = findViewById<Button>(R.id.saveBtn)

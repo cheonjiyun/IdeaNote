@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
     <Button
@@ -11,19 +12,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@color/black"
         android:text="목록"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
+        style="?android:attr/borderlessButtonStyle"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/saveBtn"
         android:text="저장"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="20sp"
-        android:background="@color/black"
+        style="?android:attr/borderlessButtonStyle"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -34,12 +35,12 @@
         android:id="@+id/memo"
         android:layout_width="match_parent"
         android:layout_height="660dp"
-        android:layout_margin="10dp"
-        android:padding="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bordertop"
         android:gravity="top"
         android:hint="내용을 입력하세요"
         android:inputType="textMultiLine"
-        android:background="#ECECEC"
+        android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/saveBtn"

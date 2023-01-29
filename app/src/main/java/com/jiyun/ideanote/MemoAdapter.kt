@@ -14,6 +14,10 @@ class MemoAdapter(val items : MutableList<String>) : RecyclerView.Adapter<MemoAd
         }
     }
 
+    interface ItemClick{
+
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.memo_list, parent, false)
 

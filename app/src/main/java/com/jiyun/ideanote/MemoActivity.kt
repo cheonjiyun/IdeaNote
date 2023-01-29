@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.io.File
 import java.io.FileInputStream
-
+import java.nio.file.Files
+import java.nio.file.Paths
 
 
 class MemoActivity : AppCompatActivity() {
@@ -23,10 +24,12 @@ class MemoActivity : AppCompatActivity() {
         setContentView(R.layout.activity_memo)
 
         val items = mutableListOf<String>() //메모 내용이 담길 변수
+        val itemNames = mutableListOf<String>()
 
         File("data/data/com.jiyun.ideanote/files").walk().forEach {
             if(it.isFile) { //파일만 읽기
 
+                itemNames.add(it.toString())
                 val reader = it.bufferedReader()
                 val iterator = reader.lineSequence().iterator()
 
@@ -52,6 +55,14 @@ class MemoActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
+
+//        //삭제 버튼
+//        val memoDeleteBtn = findViewById<Button>(R.id.memoDelete)
+//        memoDeleteBtn.setOnClickListener {
+//            val path = Paths.get("data/data/com.jiyun.ideanote/files"+itemNames)
+//            Files.deleteIfExists(path)
+//        }
     }
 
     //뒤로가기 두번해야

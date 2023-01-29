@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "947669921155",
+    "project_id": "ideanote-4e461",
+    "storage_bucket": "ideanote-4e461.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:947669921155:android:88dba8c764a75ce6f05ab6",
+        "android_client_info": {
+          "package_name": "com.jiyun.ideanote"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "947669921155-laj0sntt5evn3am19ffe7mvt4bnm880c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSfr7L1iiG6vcH65fzpuXV2WAGC3Y3kwQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "947669921155-laj0sntt5evn3am19ffe7mvt4bnm880c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
