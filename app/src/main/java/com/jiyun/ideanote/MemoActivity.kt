@@ -9,44 +9,55 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.io.File
-import java.io.FileInputStream
-import java.nio.file.Files
-import java.nio.file.Paths
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+
 
 
 class MemoActivity : AppCompatActivity() {
 
+    //익명 로그인
+    private lateinit var auth: FirebaseAuth
 
+    private val memoModels = mutableListOf<MemoModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_memo)
 
-        val items = mutableListOf<String>() //메모 내용이 담길 변수
-        val itemNames = mutableListOf<String>()
-
-        File("data/data/com.jiyun.ideanote/files").walk().forEach {
-            if(it.isFile) { //파일만 읽기
-
-                itemNames.add(it.toString())
-                val reader = it.bufferedReader()
-                val iterator = reader.lineSequence().iterator()
-
-                val content = StringBuffer()
-                while(iterator.hasNext()){
-                    content.append(iterator.next())
-                }
-                reader.close()
-
-                items.add(content.toString()) //메모 리스트에 추가
-            }
-        }
-
-        val rv = findViewById<RecyclerView>(R.id.rv)
-        val rvAdapter = MemoAdapter(items)
+        //recyclerview
+        val rv = findViewById<RecyclerView>(R.id.rv) //recylerview
+        val rvAdapter = MemoAdapter(memoModels) //adpter
         rv.adapter = rvAdapter
         rv.layoutManager = LinearLayoutManager(this)
+
+        //firebase에 있는 메모를 가져온다.
+        auth = Firebase.auth
+
+        val database = Firebase.database
+        val myRef = database.getReference("memo")
+
+        myRef
+            .child(auth.currentUser?.uid.toString())
+            .addValueEventListener(object : ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    //snapshot에 데이터모두가 담긴다.
+                    for (memoModel in snapshot.children) {
+                        memoModels.add(memoModel.getValue(MemoModel::class.java)!!)
+                    }
+                    rvAdapter.notifyDataSetChanged() //동기화
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("memo", "memo 불러오기 fail")
+                }
+
+            })
 
         //새 메모 버튼
         val newMemoBtn = findViewById<Button>(R.id.newMemoBtn)
@@ -55,7 +66,6 @@ class MemoActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
 
 //        //삭제 버튼
 //        val memoDeleteBtn = findViewById<Button>(R.id.memoDelete)

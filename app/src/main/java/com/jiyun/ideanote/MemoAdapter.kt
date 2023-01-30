@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class MemoAdapter(val items : MutableList<String>) : RecyclerView.Adapter<MemoAdapter.ViewHolder>(){
+class MemoAdapter(val items : MutableList<MemoModel>) : RecyclerView.Adapter<MemoAdapter.ViewHolder>(){
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         fun bindItems(item : String){
             val rv_text = itemView.findViewById<TextView>(R.id.memoContext)
@@ -25,7 +25,7 @@ class MemoAdapter(val items : MutableList<String>) : RecyclerView.Adapter<MemoAd
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItems(items[position])
+        holder.bindItems(items[position].memo)
     }
 
     override fun getItemCount(): Int {

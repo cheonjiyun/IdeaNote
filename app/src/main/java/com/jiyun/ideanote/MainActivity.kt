@@ -10,15 +10,12 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import java.io.FileInputStream
-import java.io.FileOutputStream
 import java.time.LocalDateTime
-
+import java.time.format.DateTimeFormatter
 
 
 class MainActivity : AppCompatActivity() {
@@ -49,21 +46,25 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-
         //저장 버튼
         val saveBtn = findViewById<Button>(R.id.saveBtn)
         saveBtn.setOnClickListener {
 
-            val memo = findViewById<EditText>(R.id.memo)
+            //메모를 firebase에 저장한다.
+            // Write a message to the database
+            val database = Firebase.database
+            val myRef = database.getReference("memo")
 
-            //메모를 내부 저장소에 텍스트 파일로 저장한다.
-            val dateNow : LocalDateTime = LocalDateTime.now()
-            val fileName = memo.text.toString() + dateNow // 파일 이름 : 메모 내용 + 현재 시간 -> 겹치지 않는 이름으로 하기 위해 이렇게 만들었다.
-            val outputFile : FileOutputStream = openFileOutput(fileName, MODE_PRIVATE)
-            outputFile.write(memo.text.toString().toByteArray())
-            outputFile.flush()
-            outputFile.close()
+            val memoContext = findViewById<EditText>(R.id.memo).text.toString() //메모 내용
+            val dateNow = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")) //날짜
 
+            val model = MemoModel(memoContext, dateNow.toString())
+            myRef
+                .child(auth.currentUser!!.uid)
+                .push()
+                .setValue(model)
+
+            //목록 Activity로 넘어간다.
             val intent = Intent(this, MemoActivity::class.java)
             startActivity(intent)
             finish()
