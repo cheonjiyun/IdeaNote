@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
@@ -60,7 +61,7 @@ class MemoActivity : AppCompatActivity() {
             })
 
         //새 메모 버튼
-        val newMemoBtn = findViewById<Button>(R.id.newMemoBtn)
+        val newMemoBtn = findViewById<FloatingActionButton>(R.id.newMemoBtn)
         newMemoBtn.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)

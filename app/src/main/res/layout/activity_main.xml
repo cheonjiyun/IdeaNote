@@ -46,5 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/saveBtn"
         app:layout_constraintVertical_bias="0.0" />
 
+    <requestFocus />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

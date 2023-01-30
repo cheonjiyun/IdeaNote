@@ -1,11 +1,13 @@
 package com.jiyun.ideanote
 
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -46,6 +48,14 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
+//        //키보드 바로 올리기
+//        val editMemo = findViewById<EditText>(R.id.memo)
+//        val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        inputMethodManager.showSoftInput(editMemo!!.rootView, InputMethodManager.SHOW_IMPLICIT)
+//        editMemo.requestFocus()
+////        showKeyBoard(editMemo)
+
+
         //저장 버튼
         val saveBtn = findViewById<Button>(R.id.saveBtn)
         saveBtn.setOnClickListener {
@@ -79,6 +89,12 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+//    private fun showKeyBoard(editMemo: EditText?) {
+//        val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        inputMethodManager.showSoftInput(editMemo!!.rootView, InputMethodManager.SHOW_IMPLICIT)
+//        editMemo.requestFocus()
+//    }
 
     //뒤로가기 두번해야
     private var isDouble = false
