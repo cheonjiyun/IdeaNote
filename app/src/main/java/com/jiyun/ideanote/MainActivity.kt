@@ -48,14 +48,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
 
-//        //키보드 바로 올리기
-//        val editMemo = findViewById<EditText>(R.id.memo)
-//        val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputMethodManager.showSoftInput(editMemo!!.rootView, InputMethodManager.SHOW_IMPLICIT)
-//        editMemo.requestFocus()
-////        showKeyBoard(editMemo)
-
-
         //저장 버튼
         val saveBtn = findViewById<Button>(R.id.saveBtn)
         saveBtn.setOnClickListener {
@@ -89,12 +81,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-//    private fun showKeyBoard(editMemo: EditText?) {
-//        val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputMethodManager.showSoftInput(editMemo!!.rootView, InputMethodManager.SHOW_IMPLICIT)
-//        editMemo.requestFocus()
-//    }
 
     //뒤로가기 두번해야
     private var isDouble = false
