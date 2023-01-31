@@ -1,6 +1,5 @@
 package com.jiyun.ideanote
 
-import android.content.Context
 import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +46,10 @@ class MainActivity : AppCompatActivity() {
                         Toast.LENGTH_SHORT).show()
                 }
             }
+
+        //키보드 바로 올라오기
+        val memoEdit = findViewById<EditText>(R.id.memo)
+        memoEdit.requestFocus()
 
         //저장 버튼
         val saveBtn = findViewById<Button>(R.id.saveBtn)
